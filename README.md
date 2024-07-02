@@ -1,152 +1,125 @@
-# reto-tecnico
+# Reto Técnico Reddit
 
-- Primer commit inicial con la creacion del proyecto utilizando el CLI de vue, seleccione vue 3.x, vuex, linter, test unitarios y routing en el asistente.
+## Decisiones Tomadas y Notas Importantes
 
-- Registre una app en la api de reddit para poder consumir los endpoints y obtuve el access token a través de postman para realizar una pequeña prueba golpeando a uno de estos endpoints.
+### Configuración Inicial del Proyecto
 
-- Me di cuenta q no necesitaba un access token para poder pegarle al endpoint de las 50 entradas principales, sino que se accede a traves de este endpoint: https://www.reddit.com/top.json?limit=50, esto segun la documentacion misma de la API
+1. **Creación del Proyecto:**
+   - **Acción:** Primer commit inicial con la creación del proyecto utilizando el CLI de Vue.
+   - **Opciones seleccionadas:** Vue 3.x, Vuex, Linter (ESLint), test unitarios (Jest) y routing.
+   - **Motivo:** Configurar un entorno de desarrollo robusto y estandarizado.
 
-- Instale axios para hacer las peticiones http a la api de reddit y cree un archivo getTopEntries para tener ahi la config de la API
+2. **Registro en la API de Reddit:**
+   - **Acción:** Registro de una app en la API de Reddit para consumir los endpoints y obtención del access token a través de Postman.
+   - **Motivo:** Realizar pruebas preliminares con los endpoints.
+   - **Observación:** No se necesitaba un access token para acceder al endpoint de las 50 entradas principales: `https://www.reddit.com/top.json?limit=50`.
 
----
+### Instalación de Dependencias
 
-- cree una carpeta modulos para modularizar la app, se que no es necesario por el tamaño del proyecto, pero lo considero una buena práctica y me servira de ejemplo para implementar un routing propio en el modulo de entradas de reddit.
+3. **Instalación de Axios y Configuración de la API:**
+   - **Acción:** Instalación de Axios para hacer peticiones HTTP y creación del archivo `getTopEntries.js` para la configuración de la API.
+   - **Comando:**
+     ```bash
+     npm install axios
+     ```
 
-- Elimine los componentes helloWorld y about que no los voy a estar necesitando y modifique el componente home para que me sirva a modo de entrada a la aplicación, todo ello para poder probar el routing.
+### Estructuración y Modularización del Proyecto
 
-- cambie el logo de vue por el logo de reddit,
+4. **Modularización:**
+   - **Acción:** Creación de una carpeta `modules` para modularizar la aplicación.
+   - **Motivo:** Buenas prácticas de organización del código.
+   - **Acciones adicionales:** Eliminación de componentes innecesarios (`HelloWorld` y `About`) y modificación del componente `Home`.
 
-- cree un nav aun sin estilos (Para esto estoy pensando utilizar boostrap por temas de tiempo),
+5. **Navbar y Reglas de ESLint:**
+   - **Acción:** Creación de un `Navbar` sin estilos iniciales.
+   - **Acción:** Adición de una regla en ESLint para permitir nombres simples en los componentes.
+   - **Motivo:** Preferencia personal y simplificación del código.
 
-- Agregué una regla al Eslint para que me permita tener nombres simples en mis componentes por ejemplo Navbar en vez de NavbarVue o NavbarComponent, esto por preferencia personal.
+### Estilos y Maquetación
 
-- Agregué alguna estructura de carpetas q pienso que voy a estar necesitando a futuro dentro del modulo de las entradas de reddit.
+6. **Integración de Bootstrap y FontAwesome:**
+   - **Acción:** Instalación de Bootstrap y configuración de FontAwesome mediante CDN.
+   - **Comando:**
+     ```bash
+     npm install bootstrap @fortawesome/fontawesome-free
+     npm install --save-dev sass sass-loader
+     ```
 
----
+7. **Estilos Personalizados:**
+   - **Acción:** Creación de una carpeta `css` con un archivo `styles.scss` y estilos reset.
+   - **Motivo:** Uniformidad de estilos entre diferentes navegadores.
 
-- Agregué boostrap para tener algunos estilos predefinidos.
+### Desarrollo de Componentes y Funcionalidades
 
-- Agregué una carpeta css con un archivo styles.scss (voy a estar usando sass para esto tuve q instalar sass y sass loader como dependencias de desarrollo) y unos estilos reset del css para evitar que algunos estilos difieran segun el navegador.
+8. **Componentes de Listado y Entrada:**
+   - **Acción:** Creación de los componentes `EntryList` y `Entry` con un maquetado inicial.
+   - **Motivo:** Separar la lógica y presentación de las entradas.
 
----
+9. **Pantalla Completa para Imágenes:**
+   - **Acción:** Implementación de la funcionalidad para mostrar imágenes en pantalla completa.
+   - **Motivo:** Mejorar la experiencia del usuario al visualizar imágenes.
 
-- Agregué un componente para contener el listado (Entry list) de entradas (Entry).
-- Agregué un maquetado inicial con la data que se requiere mostrar por entrada.
+10. **Galería de Imágenes:**
+    - **Acción:** Adición de la funcionalidad para guardar imágenes en una galería personal.
+    - **Motivo:** Funcionalidad extra útil para los usuarios.
 
-![Maquetado inicial Desktop](https://res.cloudinary.com/dhromiae3/image/upload/v1710781925/reto-tecnico/uzrd8rd2pmliga5qnlfc.png)
+### Integración y Persistencia de Datos
 
-![Maquetado inicial Mobile](https://res.cloudinary.com/dhromiae3/image/upload/v1710782114/reto-tecnico/iyg1xebuauyajac4saj4.png)
+11. **Integración de la API:**
+    - **Acción:** Consumo del endpoint de Reddit para obtener las 50 entradas principales.
+    - **Motivo:** Obtener los datos necesarios para el listado de entradas.
 
----
+12. **Persistencia con Firebase:**
+    - **Acción:** Configuración de Firebase para almacenar el estado de las entradas leídas y las imágenes guardadas.
+    - **Motivo:** Persistencia de datos entre sesiones.
 
-- Agregué el cdn de fontawesome para poder utilizar algunos iconos que voy a estar necesitando (como el de los comentarios o el avatar, salir de la aplicacion, etc)
+### Testing
 
-- Agregué una maquetación con la informacion sobre si la entrada ha sido leida, el nro de comentarios de la entrada.
+13. **Configuración de Jest:**
+    - **Acción:** Configuración de Jest para realizar pruebas unitarias.
+    - **Motivo:** Asegurar la calidad del código.
+    - **Configuración:**
+      ```javascript
+      module.exports = {
+        preset: '@vue/cli-plugin-unit-jest',
+        transform: {
+          '^.+\\.vue$': 'vue-jest',
+          '^.+\\.[t|j]sx?$': 'babel-jest',
+        },
+        testMatch: [
+          '**/tests/**/*.spec.[jt]s?(x)',
+        ],
+      };
+      ```
+    - **Ejecución de pruebas:** `npm run test:unit`.
 
-![Maquetado número de comentarios y entrada vista](https://res.cloudinary.com/dhromiae3/image/upload/v1710784590/reto-tecnico/ayisc1zl61moqrk75lxe.png)
+### Notas Finales
 
-- Agregué la funcionalidad de mostrar en pantalla completa la imagen una vez seleccionada.
-
-![Maquetado imagen seleccionada en pantalla completa](https://res.cloudinary.com/dhromiae3/image/upload/v1710784591/reto-tecnico/ckymehlkc6t3t6rfsbob.png)
-
----
-
-- Agregué la maquetación y funcionalidad de paginación en la lista de entradas.
-
-![Maquetado paginación](https://res.cloudinary.com/dhromiae3/image/upload/v1710786308/reto-tecnico/tqiyjwdmxyucnspkq5ua.png)
-
----
-
-- Cambié el diseño para soportar doble vista (izq (entrada) - der (detalle)) q se pide en la 2da parte del reto.
-
-- Algunos ajustes en el color del texto.
-
-![Maquetado izq - der](https://res.cloudinary.com/dhromiae3/image/upload/v1710790116/reto-tecnico/ifkys7imj1z1mtadwba5.png)
-
----
-
-- Agregué la pegada a la API de top entradas, agregue las configuraciones necesarias para poder tener la data en un store para poder tener toda esta data centralizada y pueda manejarse de manera correcta.
-
-- Hice el mapeo de la data, segun lo q solicita el reto.
-
-- Agregue algunos Helpers y funciones para trabajar las imagenes y devolver las horas en el formato requerido en el reto.
-
-![Integración](https://res.cloudinary.com/dhromiae3/image/upload/v1710796074/reto-tecnico/zlkyuy1xgcuzqxnyiwtz.png)
-
----
-
-- Agregué una condicional para ocultar las imagenes cuando el post no tienen un thumbnail.
-
-- Agregué la funcionalidad de al hacer click en el thumbnail se cargue la imagen en tamaño completo, o en su defecto se muestre el propio thumbnail (cuando la imagen en tamaño completo no sea válida).
-
-- Ya estoy mostrando los posts en el lado derecho.
-
-- Corregí la paginacion, de momento tiene 10 items por pagina y solo los botones para la pagina anterior y siguiente.
-
-(\*) Ya me falta muy poco para terminar, en el proximo commit estare enviando el estado persistido de los post leídos o no leídos, no me quedan claros un par de requerimiento:
-• Guardar imágenes en la galería de imágenes.
-• Botón Descartar publicación.
-
-asumiré que se necesita persistir en una base de datos para esto entiendo que puedo usar algo como firebase, entiendo que reddit no tiene una funcionalidad incorporada para marcar posts como leídos o no leídos, para esto tambien creo que puedo usar un restApi en firebase para persistir esta data no solo de manera local con el store, sino tambien para cuando vuelva a entrar a la aplicación a traves de esta db.
-
----
-
-- Arreglando el ancho y alto de las imagenes y de la pantalla de bienvenida.
-
----
-
-- Arreglando algunos estilos y navegación.
-
-- Creé una base de datos en firebase para guardar la data q necesito para saber si una entrada ha sido leida y posteriormente su imagen para poder listarla posteriormente en una galeria.
-
-- Ya se muestran las entradas leidas segun la respuesta de la base de datos de firebase.
-
-![Leido desde firebase](https://res.cloudinary.com/dhromiae3/image/upload/v1710812214/reto-tecnico/n0hprvahqxzurdiifbfo.png)
+- **Persistencia de Entradas Leídas:** Implementada utilizando Firebase.
+- **Galería de Imágenes:** Integrada con Firebase.
+- **Optimización de Estilos:** Uso de SCSS y Bootstrap.
+- **Mejoras de Interfaz:** Tooltips y efectos hover para mejor UX.
 
 ---
 
-- Ya se actualizan y se marcan en tiempo real las entradas seleccionadas como leídas.
+## Configuración del Proyecto
 
----
+### Instalación de Dependencias
 
-- Agregué una vista para mostrar la galería de imagenes, se puede guardar una imagen en la galería desde el menu de fullscreen de las entradas.
-
----
-
-- Agregué las ultimas funcionalidades faltantes para remover una entrada en particular y varias (todas las entradas de esa pagina).
-
-- Agregué algunos tooltip de ayuda en los botones para una mejor experiencia de usuario.
-
-## Project setup
-
-```
 npm install
-```
 
-### Compiles and hot-reloads for development
+### Compilación y Recarga en Caliente para Desarrollo
 
-```
 npm run serve
-```
 
-### Compiles and minifies for production
+### Compilación para Producción
 
-```
 npm run build
-```
 
-### Run your unit tests
+### Ejecución de Pruebas Unitarias
 
-```
 npm run test:unit
-```
 
-### Lints and fixes files
+### Linting y Corrección de Archivos
 
-```
 npm run lint
-```
-
-### Customize configuration
-
-See [Configuration Reference](https://cli.vuejs.org/config/).

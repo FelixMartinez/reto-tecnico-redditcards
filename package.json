@@ -12,9 +12,11 @@
     "axios": "^1.6.8",
     "bootstrap": "^5.3.3",
     "core-js": "^3.8.3",
+    "strip-ansi": "^7.1.0",
     "vue": "^3.2.13",
     "vue-jest": "^3.0.7",
     "vue-router": "^4.0.3",
+    "vue-template-compiler": "^2.7.16",
     "vuex": "^4.0.0"
   },
   "devDependencies": {
@@ -37,5 +39,19 @@
     "prettier": "^2.4.1",
     "sass": "^1.72.0",
     "sass-loader": "^10.5.2"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.vue$": "vue-jest",
+      "^.+\\.js$": "babel-jest"
+    },
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "vue"
+    ],
+    "snapshotSerializers": [
+      "jest-serializer-vue"
+    ]
   }
 }
