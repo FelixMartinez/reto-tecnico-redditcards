@@ -10,12 +10,7 @@
         <span>{{ entry.title }}</span>
       </div>
       <div v-if="hasValidThumbnail" class="entry-thumbnail-container my-2">
-        <img
-          @click="toggleFullscreen"
-          class="img-fluid"
-          :src="entry.thumbnail"
-          alt="thumbnail"
-        />
+        <img class="img-fluid" :src="entry.thumbnail" alt="thumbnail" />
         <div v-if="fullscreen" class="fullscreen-overlay">
           <div class="exit-fullscreen-btns">
             <button
